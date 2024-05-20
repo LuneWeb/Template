@@ -2010,7 +2010,7 @@ dependencies = [
 [[package]]
 name = "luneweb"
 version = "0.1.6"
-source = "git+https://github.com/LuneWeb/LuneWeb-rs#15cdb22cc74b524d3d7a174cab3ff60bfe3c0894"
+source = "git+https://github.com/LuneWeb/LuneWeb-rs?tag=v0.1.6#f4e1b3b3afd8f9b48942b633bb7e783954cf3d76"
 dependencies = [
  "lune-std",
  "lune-std-serde 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
