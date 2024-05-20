@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 mlua = { version = "0.9.8", features = ["luau"] }
-luneweb = { git = "https://github.com/LuneWeb/LuneWeb-rs", tag = "v0.1.6" }
+luneweb = { git = "https://github.com/LuneWeb/LuneWeb-rs", tag = "v0.1.7" }
 tokio = { version = "1.37.0", features = ["macros"] }
 include_dir = "0.7.3"
 
