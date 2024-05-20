@@ -1,6 +1,9 @@
-document.body.style.display = 'flex'
-document.body.style.flexDirection = 'column'
-document.body.style.justifyContent = 'center'
-document.body.style.alignItems = 'center'
+async function testCustomProtocol() {
+    let res = await fetch('http://app.path/')
+    console.log("Received message from custom protocol:", await res.text())
+}
 
-window.luneweb.postMessage("loaded", null)
+window.luneweb.postMessage('load', null)
+
+testCustomProtocol()
+testCustomProtocol = undefined
