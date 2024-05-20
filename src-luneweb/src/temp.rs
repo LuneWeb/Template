@@ -1,5 +1,29 @@
-use include_dir::{include_dir, Dir};
+use include_dir::{include_dir, Dir, File};
 use std::{env::set_current_dir, fs, path::PathBuf};
+
+fn move_dir(parent: &PathBuf, dir: &Dir) {
+    for dir in dir.entries() {
+        if let Some(file) = dir.as_file() {
+            write_file(&parent, file);
+        } else if let Some(dir) = dir.as_dir() {
+            let path = parent.join(dir.path());
+
+            fs::create_dir_all(&path).expect("Failed to create temp directory");
+
+            move_dir(&parent, dir);
+        }
+    }
+}
+
+fn write_file(parent: &PathBuf, file: &File) {
+    let path = parent.join(file.path());
+
+    if path.exists() {
+        return;
+    }
+
+    fs::write(path, file.contents()).expect("Failed to create temp file");
+}
 
 pub fn build_dir() {
     const SRC_DIR: Dir = include_dir!("src/");
@@ -17,17 +41,7 @@ pub fn build_dir() {
     fs::create_dir_all(&src_dir).expect("Failed to create temp directory");
     fs::create_dir_all(&cwd_dir).expect("Failed to create temp directory");
 
-    for dir in SRC_DIR.entries() {
-        if let Some(file) = dir.as_file() {
-            let path = src_dir.join(file.path());
-
-            if path.exists() {
-                continue;
-            }
-
-            fs::write(path, file.contents()).expect("Failed to create temp file");
-        }
-    }
+    move_dir(&src_dir, &SRC_DIR);
 
     // we do this so things fs functions will be relative to our temp directory
     set_current_dir(cwd_dir).expect("Failed to set current directory to temp directory");
