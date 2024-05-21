@@ -1,41 +1,16 @@
--- Types
-local _event_loop = require("@luneweb/event_loop")
-local _webview = require("@luneweb/webview")
-local _window = require("@luneweb/window")
+local mod_event_loop = require("@luneweb/event_loop")
+local mod_webview = require("@luneweb/webview")
+local mod_window = require("@luneweb/window")
+local fs = require("@lune/fs")
 
--- Modules
-local lib = {
-	event_loop = _event_loop,
-	webview = _webview,
-	window = _window,
+local webview_builder = mod_webview.new()
+webview_builder:with_initialization_script(fs.readDir("../src/init.js"))
 
-	event_loop_builder = require("event_loop"),
-	webview_builder = require("webview"),
-	ui = require("app/ui"),
-	scope = require("app/scope"),
+local window = mod_window.new()
+local _webview = webview_builder:build(window)
 
-	fs = require("@lune/fs"),
-}
-
-local window = lib.window.new()
-local webview = lib.webview_builder(window)
-local current_scope
-
-webview:subscribe("load", function(_)
-	-- clean previous scope
-	if current_scope then
-		current_scope:clean()
+mod_event_loop.subscribe(window.id, function(event)
+	if event == "CloseRequested" then
+		window:close()
 	end
-
-	-- create new scope
-	current_scope = lib.scope(webview)
-
-	-- recreate ui using the new scope
-	lib.ui(current_scope)
 end)
-
-lib.event_loop_builder(function()
-	if current_scope then
-		current_scope:clean()
-	end
-end, window)
