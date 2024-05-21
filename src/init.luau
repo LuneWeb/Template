@@ -17,28 +17,24 @@ local lib = {
 	fs = require("@lune/fs"),
 }
 
-local connections: { _event_loop.Connection } = {}
 local window = lib.window.new()
-local webview = lib.webview_builder(connections, window)
+local webview = lib.webview_builder(window)
 local current_scope
 
-table.insert(
-	connections,
-	webview:subscribe("load", function(_)
-		-- clean previous scope
-		if current_scope then
-			current_scope:clean()
-		end
+webview:subscribe("load", function(_)
+	-- clean previous scope
+	if current_scope then
+		current_scope:clean()
+	end
 
-		-- create new scope
-		current_scope = lib.scope(webview)
+	-- create new scope
+	current_scope = lib.scope(webview)
 
-		-- recreate ui using the new scope
-		lib.ui(current_scope)
-	end)
-)
+	-- recreate ui using the new scope
+	lib.ui(current_scope)
+end)
 
-lib.event_loop_builder(connections, function()
+lib.event_loop_builder(function()
 	if current_scope then
 		current_scope:clean()
 	end

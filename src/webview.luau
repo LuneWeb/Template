@@ -7,22 +7,19 @@ local lib = {
 	fs = require("@lune/fs"),
 }
 
-return function(connections: { _webview.Connection }, window: _window.Window)
+return function(window: _window.Window)
 	-- Building webview
 	local builder = lib.webview.new()
 	builder:with_initialization_script(lib.fs.readFile("../src/init.js"))
 
-	table.insert(
-		connections,
-		builder:with_custom_protocol("app", function(request)
-			return {
-				body = '"Hello, World!"',
-				headers = {
-					["Access-Control-Allow-Origin"] = "*",
-				},
-			}
-		end)
-	)
+	builder:with_custom_protocol("app", function(request)
+		return {
+			body = '"Hello, World!"',
+			headers = {
+				["Access-Control-Allow-Origin"] = "*",
+			},
+		}
+	end)
 
 	return builder:build(window)
 end

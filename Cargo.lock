@@ -2009,8 +2009,8 @@ dependencies = [
 
 [[package]]
 name = "luneweb"
-version = "0.1.7"
-source = "git+https://github.com/LuneWeb/LuneWeb-rs?tag=v0.1.7#bb4e5ce7e8cd0a25fdf32861c8bf085cb837d16e"
+version = "0.1.8"
+source = "git+https://github.com/LuneWeb/LuneWeb-rs?tag=v0.1.8#d334a431aa62be3d07dd1040181a18bf88335f02"
 dependencies = [
  "bstr",
  "http 1.1.0",
