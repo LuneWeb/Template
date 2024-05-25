@@ -1,5 +1,7 @@
-use luneweb::{init, patch_lua};
-use std::{path::PathBuf, rc::Rc};
+use lune_std::context::GlobalsContextBuilder;
+use luneweb::lua::{inject_globals, patch_lua};
+use mlua_luau_scheduler::Scheduler;
+use std::{fs, path::PathBuf, rc::Rc};
 
 mod temp;
 
@@ -9,19 +11,24 @@ mod console;
 #[tokio::main]
 async fn main() -> mlua::Result<()> {
     let lua = Rc::new(mlua::Lua::new());
+    let mut builder = GlobalsContextBuilder::default();
+
     patch_lua(&lua);
+    inject_globals(&mut builder)?;
+    lune_std::inject_globals(&lua, builder)?;
+
     temp::build_dir();
 
     #[cfg(not(debug_assertions))]
     console::hide_console();
 
-    let src = PathBuf::from("../src/init.luau");
-    let result = init(&lua, &src).await;
+    let sched = Scheduler::new(&lua);
+    let path = PathBuf::from("../src/init.luau");
+    let src = fs::read_to_string(&path)?;
 
-    match result {
-        Ok(sched) => sched.run().await,
-        Err(err) => println!("{err:?}"),
-    }
+    let main = lua.load(src).set_name(path.to_string_lossy().to_string());
+    sched.push_thread_back(main, ())?;
+    sched.run().await;
 
     Ok(())
 }

@@ -1522,9 +1522,9 @@ dependencies = [
 
 [[package]]
 name = "hyper-util"
-version = "0.1.3"
+version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ca38ef113da30126bbff9cd1705f9273e15d45498615d138b0c20279ac7a76aa"
+checksum = "3d8d52be92d09acc2e01dddb7fde3ad983fc6489c7db4837e605bc3fca4cb63e"
 dependencies = [
  "bytes",
  "futures-channel",
@@ -1780,8 +1780,10 @@ name = "luau_app"
 version = "0.1.0"
 dependencies = [
  "include_dir",
+ "lune-std",
  "luneweb",
  "mlua",
+ "mlua-luau-scheduler",
  "tokio",
  "winapi",
 ]
@@ -2009,8 +2011,8 @@ dependencies = [
 
 [[package]]
 name = "luneweb"
-version = "0.2.0"
-source = "git+https://github.com/LuneWeb/LuneWeb-rs?tag=v0.2.0#d1d6503f285a6d56a3a959aaa42f38753a7a079f"
+version = "0.2.1"
+source = "git+https://github.com/LuneWeb/LuneWeb-rs?tag=v0.2.1#ae60a9fee6404c11c4c59285ec063075c334c907"
 dependencies = [
  "bstr",
  "http 1.1.0",
@@ -3891,7 +3893,6 @@ dependencies = [
  "tokio",
  "tower-layer",
  "tower-service",
- "tracing",
 ]
 
 [[package]]
@@ -3912,7 +3913,6 @@ version = "0.1.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c3523ab5a71916ccf420eebdf5521fcef02141234bbc0b8a49f2fdc4544364ef"
 dependencies = [
- "log",
  "pin-project-lite",
  "tracing-attributes",
  "tracing-core",
