@@ -5,15 +5,19 @@ edition = "2021"
 
 [dependencies.luneweb]
 git = "https://github.com/LuneWeb/LuneWeb-rs"
-tag = "v0.2.2"
+tag = "v0.2.3"
 
 [dependencies.lune-std]
 git = "https://github.com/LuneWeb/Lune"
 rev = "e1d5448e9ad01a65afe5c702e4ca0af420edd0b3"
 package = "lune-std"
 
+[dependencies.mlua-luau-scheduler]
+git = "https://github.com/LuneWeb/Lune"
+rev = "e1d5448e9ad01a65afe5c702e4ca0af420edd0b3"
+package = "mlua-luau-scheduler"
+
 [dependencies]
-mlua-luau-scheduler = "0.0.2"
 mlua = { version = "0.9.8", features = ["luau"] }
 tokio = { version = "1.37.0", features = ["macros"] }
 include_dir = "0.7.3"

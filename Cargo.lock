@@ -1803,7 +1803,7 @@ dependencies = [
  "lune-std",
  "luneweb",
  "mlua",
- "mlua-luau-scheduler 0.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "mlua-luau-scheduler",
  "tokio",
  "winapi",
 ]
@@ -1843,7 +1843,7 @@ dependencies = [
  "lune-std-task",
  "lune-utils 0.1.1",
  "mlua",
- "mlua-luau-scheduler 0.0.2 (git+https://github.com/LuneWeb/Lune?rev=e1d5448e9ad01a65afe5c702e4ca0af420edd0b3)",
+ "mlua-luau-scheduler",
  "serde",
  "serde_json",
  "tokio",
@@ -1897,7 +1897,7 @@ dependencies = [
  "lune-std-serde 0.1.0 (git+https://github.com/LuneWeb/Lune?rev=e1d5448e9ad01a65afe5c702e4ca0af420edd0b3)",
  "lune-utils 0.1.1",
  "mlua",
- "mlua-luau-scheduler 0.0.2 (git+https://github.com/LuneWeb/Lune?rev=e1d5448e9ad01a65afe5c702e4ca0af420edd0b3)",
+ "mlua-luau-scheduler",
  "reqwest",
  "tokio",
  "tokio-tungstenite",
@@ -1912,7 +1912,7 @@ dependencies = [
  "directories",
  "lune-utils 0.1.1",
  "mlua",
- "mlua-luau-scheduler 0.0.2 (git+https://github.com/LuneWeb/Lune?rev=e1d5448e9ad01a65afe5c702e4ca0af420edd0b3)",
+ "mlua-luau-scheduler",
  "os_str_bytes",
  "pin-project",
  "tokio",
@@ -1937,7 +1937,7 @@ dependencies = [
  "lune-roblox",
  "lune-utils 0.1.1",
  "mlua",
- "mlua-luau-scheduler 0.0.2 (git+https://github.com/LuneWeb/Lune?rev=e1d5448e9ad01a65afe5c702e4ca0af420edd0b3)",
+ "mlua-luau-scheduler",
  "once_cell",
  "rbx_cookie",
 ]
@@ -1992,7 +1992,7 @@ dependencies = [
  "dialoguer",
  "lune-utils 0.1.1",
  "mlua",
- "mlua-luau-scheduler 0.0.2 (git+https://github.com/LuneWeb/Lune?rev=e1d5448e9ad01a65afe5c702e4ca0af420edd0b3)",
+ "mlua-luau-scheduler",
  "tokio",
 ]
 
@@ -2003,7 +2003,7 @@ source = "git+https://github.com/LuneWeb/Lune?rev=e1d5448e9ad01a65afe5c702e4ca0a
 dependencies = [
  "lune-utils 0.1.1",
  "mlua",
- "mlua-luau-scheduler 0.0.2 (git+https://github.com/LuneWeb/Lune?rev=e1d5448e9ad01a65afe5c702e4ca0af420edd0b3)",
+ "mlua-luau-scheduler",
  "tokio",
 ]
 
@@ -2038,8 +2038,8 @@ dependencies = [
 
 [[package]]
 name = "luneweb"
-version = "0.2.2"
-source = "git+https://github.com/LuneWeb/LuneWeb-rs?tag=v0.2.2#0ab453b559b43ce20a76e016178c2d3a8c0b44d4"
+version = "0.2.3"
+source = "git+https://github.com/LuneWeb/LuneWeb-rs?tag=v0.2.3#4c8f6fb279f99993457922254eccca65f83ac8a8"
 dependencies = [
  "bstr",
  "http 1.1.0",
@@ -2047,7 +2047,7 @@ dependencies = [
  "lune-std-serde 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "lune-utils 0.1.0",
  "mlua",
- "mlua-luau-scheduler 0.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "mlua-luau-scheduler",
  "once_cell",
  "serde",
  "serde_json",
@@ -2178,23 +2178,6 @@ dependencies = [
  "rustc-hash",
  "serde",
  "serde-value",
-]
-
-[[package]]
-name = "mlua-luau-scheduler"
-version = "0.0.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a13eabdbc57fa38cf0b604d98ce3431573c79a964aac56e09c16c240d36cb1bf"
-dependencies = [
- "async-executor",
- "blocking",
- "concurrent-queue",
- "derive_more",
- "event-listener 4.0.3",
- "futures-lite",
- "mlua",
- "rustc-hash",
- "tracing",
 ]
 
 [[package]]
@@ -4659,9 +4642,9 @@ dependencies = [
 
 [[package]]
 name = "wry"
-version = "0.40.0"
+version = "0.40.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7cd42682bad8d1efd0e0d0593770c602c13b8922bb1ca705cb845967de81bbc4"
+checksum = "1fa597526af53f310a8e6218630c5024fdde8271f229e70d7d2fc70b52b8fb1e"
 dependencies = [
  "base64 0.22.1",
  "block",
