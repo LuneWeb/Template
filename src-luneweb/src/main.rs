@@ -13,6 +13,9 @@ async fn main() -> mlua::Result<()> {
     let lua = Rc::new(mlua::Lua::new());
     let mut builder = GlobalsContextBuilder::default();
 
+    // This is possible with the latest lune commit
+    let _ = lua.sandbox(true);
+
     patch_lua(&lua);
     inject_globals(&mut builder)?;
     lune_std::inject_globals(&lua, builder)?;
