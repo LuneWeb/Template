@@ -5,11 +5,11 @@ edition = "2021"
 
 [dependencies.luneweb]
 git = "https://github.com/LuneWeb/LuneWeb-rs"
-tag = "v0.2.1"
+tag = "v0.2.2"
 
 [dependencies.lune-std]
 git = "https://github.com/LuneWeb/Lune"
-rev = "e375af1f1a9da052fd05b570ffe32ea23613d6fd"
+rev = "e1d5448e9ad01a65afe5c702e4ca0af420edd0b3"
 package = "lune-std"
 
 [dependencies]
