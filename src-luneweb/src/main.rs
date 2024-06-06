@@ -1,5 +1,6 @@
 use lune_std::context::GlobalsContextBuilder;
 use luneweb::lua::{inject_globals, patch_lua};
+use mlua::ExternalResult;
 use mlua_luau_scheduler::Scheduler;
 use std::{fs, path::PathBuf, rc::Rc};
 
@@ -13,8 +14,7 @@ async fn main() -> mlua::Result<()> {
     let lua = Rc::new(mlua::Lua::new());
     let mut builder = GlobalsContextBuilder::default();
 
-    // This is possible with the latest lune commit
-    let _ = lua.sandbox(true);
+    lua.sandbox(true).into_lua_err()?;
 
     patch_lua(&lua);
     inject_globals(&mut builder)?;
