@@ -1,21 +1,35 @@
 use include_dir::{include_dir, Dir, File};
-use std::{env::set_current_dir, fs, path::PathBuf};
+use std::{
+    env::set_current_dir,
+    fs,
+    path::{Path, PathBuf},
+};
+
+fn is_script(path: &Path) -> bool {
+    let Some(ext) = path.extension() else {
+        return false;
+    };
+
+    matches!(ext.to_str().unwrap(), "luau" | "lua")
+}
 
 fn move_dir(parent: &PathBuf, dir: &Dir) {
     for dir in dir.entries() {
         if let Some(file) = dir.as_file() {
-            write_file(&parent, file);
+            if !is_script(dir.path()) {
+                write_file(parent, file);
+            }
         } else if let Some(dir) = dir.as_dir() {
             let path = parent.join(dir.path());
 
             fs::create_dir_all(&path).expect("Failed to create temp directory");
 
-            move_dir(&parent, dir);
+            move_dir(parent, dir);
         }
     }
 }
 
-fn write_file(parent: &PathBuf, file: &File) {
+fn write_file(parent: &Path, file: &File) {
     let path = parent.join(file.path());
 
     if path.exists() {
