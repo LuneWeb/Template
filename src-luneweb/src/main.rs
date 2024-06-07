@@ -3,7 +3,7 @@ use lune_std::context::GlobalsContextBuilder;
 use luneweb::lua::{inject_globals, patch_lua};
 use mlua::ExternalResult;
 use mlua_luau_scheduler::Scheduler;
-use std::rc::Rc;
+use std::{env::current_dir, rc::Rc};
 
 mod bundle;
 mod temp;
@@ -34,7 +34,13 @@ async fn main() -> mlua::Result<()> {
     let file = SRC_DIR.get_file("init.luau").unwrap();
     let src = file.contents_utf8().unwrap();
 
-    let main = lua.load(src).set_name(file.path().to_string_lossy());
+    let main = lua.load(src).set_name(
+        current_dir()
+            .unwrap()
+            .join("../src/")
+            .join(file.path())
+            .to_string_lossy(),
+    );
     sched.push_thread_back(main, ())?;
     sched.run().await;
 

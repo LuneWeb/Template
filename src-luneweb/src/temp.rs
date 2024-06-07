@@ -5,6 +5,8 @@ use std::{
     path::{Path, PathBuf},
 };
 
+pub const TEMP_DIR: &str = "./.temp";
+
 fn is_script(path: &Path) -> bool {
     let Some(ext) = path.extension() else {
         return false;
@@ -41,7 +43,6 @@ fn write_file(parent: &Path, file: &File) {
 
 pub fn build_dir() {
     const SRC_DIR: Dir = include_dir!("src/");
-    const TEMP_DIR: &str = "./.temp";
 
     let temp_dir = PathBuf::from(TEMP_DIR);
 
