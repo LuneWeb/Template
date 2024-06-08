@@ -13,10 +13,6 @@ pub fn bundle(ctx_builder: &mut GlobalsContextBuilder) -> mlua::Result<()> {
         ctx_builder.with_script(cwd.join("src").join(file.path()), file.contents().into())
     }
 
-    for file in ASSETS_DIR.files() {
-        println!("{}", file.path().display());
-    }
-
     ctx_builder.with_alias("bundler", move |modules| {
         modules.insert(
             "assets",
