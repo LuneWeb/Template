@@ -22,7 +22,6 @@ pub fn bundle(ctx_builder: &mut GlobalsContextBuilder) -> mlua::Result<()> {
                 t.set(
                     "readFile",
                     lua.create_function(|_, path: String| {
-                        println!("{path}");
                         if let Some(file) = ASSETS_DIR.get_file(&path) {
                             Ok(Some(String::from_utf8_lossy(file.contents())))
                         } else {
