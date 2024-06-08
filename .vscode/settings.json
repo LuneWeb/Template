@@ -3,6 +3,7 @@
   "luau-lsp.types.roblox": false,
   "luau-lsp.require.directoryAliases": {
     "@lune/": "~/.lune/.typedefs/0.8.4/",
-    "@luneweb/": "./types/src/"
+    "@luneweb/": "./types/src/",
+    "@local/": "./src-luneweb/local.d/"
   }
 }

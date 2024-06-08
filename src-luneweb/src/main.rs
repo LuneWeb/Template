@@ -6,7 +6,6 @@ use mlua_luau_scheduler::Scheduler;
 use std::{env::current_dir, rc::Rc};
 
 mod bundle;
-mod temp;
 
 #[cfg(not(debug_assertions))]
 mod console;
@@ -16,14 +15,11 @@ async fn main() -> mlua::Result<()> {
     let lua = Rc::new(mlua::Lua::new());
     let mut builder = GlobalsContextBuilder::default();
 
+    patch_lua(&lua);
     lua.sandbox(true).into_lua_err()?;
 
-    patch_lua(&lua);
     inject_globals(&mut builder)?;
-
-    bundle::bundle(&mut builder);
-    temp::build_dir();
-
+    bundle::bundle(&mut builder)?;
     lune_std::inject_libraries(&mut builder)?;
     lune_std::inject_globals(&lua, &builder.build())?;
 
