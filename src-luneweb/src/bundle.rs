@@ -17,7 +17,7 @@ pub fn bundle(ctx_builder: &mut GlobalsContextBuilder) -> mlua::Result<()> {
         println!("{}", file.path().display());
     }
 
-    ctx_builder.with_alias("local", move |modules| {
+    ctx_builder.with_alias("bundler", move |modules| {
         modules.insert(
             "assets",
             LuneModuleCreator::LuaTable(|lua| {
