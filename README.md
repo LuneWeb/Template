@@ -5,7 +5,7 @@
 > [!NOTE]
 > the `src` directory is for luau scripts
 >
-> and the `assets` directory is for files you want to access in your scripts using `require("@local/assets").readFile('<fileName>')`
+> and the `assets` directory is for files you want to access in your scripts using `require("@bundler/assets").readFile('<fileName>')`
 >
 > this is because of how the current bundler in `src-luneweb/src/bundle.rs` works
 
