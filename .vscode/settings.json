@@ -4,6 +4,6 @@
   "luau-lsp.require.directoryAliases": {
     "@lune/": "~/.lune/.typedefs/0.8.4/",
     "@luneweb/": "./types/src/",
-    "@local/": "./src-luneweb/local.d/"
+    "@bundler/": "./src-luneweb/bundler.d/"
   }
 }
