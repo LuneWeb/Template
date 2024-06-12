@@ -1,5 +1,7 @@
 # LuneWeb-template
 
+This repo will not always be up-to-date with the latest version of lune-std and luneweb-rs, so if You're looking for the most up-to-date examples, You shall read the examples in the [luneweb-rs repo](https://github.com/LuneWeb/LuneWeb-rs/tree/main/examples)
+
 ---
 
 > [!NOTE]
