@@ -1,16 +1,16 @@
-local mod_event_loop = require("@luneweb/event_loop")
-local mod_webview = require("@luneweb/webview")
-local mod_window = require("@luneweb/window")
-local assets = require("@bundler/assets")
+--!nocheck
+--!nolint UnknownGlobal
+local datetime = require("@lune/datetime")
 
-local webview_builder = mod_webview.new()
-webview_builder:with_initialization_script(assets.readFile("js/init.js"))
+app:onLoad(function()
+	app:shareMessage("Hello, WebView!")
+	app:shareMessage({
+		message = "Hello!",
+		age = 18,
+		time = datetime.now().unixTimestamp,
+	})
 
-local window = mod_window.new()
-local _webview = webview_builder:build(window)
-
-mod_event_loop.subscribe(window.id, function(event)
-	if event == "CloseRequested" then
-		window:close()
-	end
+	print(`WebView returned: {app:sendMessage("Channel1", "Hello!")}`)
 end)
+
+app:run()

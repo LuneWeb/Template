@@ -1,0 +1,13 @@
+{
+  "name": "template",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "vite": "^5.3.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "luneweb-api": "^0.3.0-pre2"
+  }
+}
