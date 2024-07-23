@@ -1,3 +1,4 @@
+--!strict
 local datetime = require("@lune/datetime")
 
 app:onLoad(function()

@@ -5,4 +5,5 @@
 [tools]
 lune = "lune-org/lune@0.8.6"
 luneweb = "luneweb/luneweb@0.3.0-pre2"
+luau = "JohnnyMorganz/luau-lsp@1.32.0"
 # rojo = "rojo-rbx/rojo@6.2.0"
