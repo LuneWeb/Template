@@ -1,5 +1,5 @@
 [tools]
-luneweb = "luneweb/luneweb@0.3.0-pre2"
+luneweb = "luneweb/luneweb@0.3.0-pre3"
 lune = "luneweb/lune@0.1.1"
 luau = "JohnnyMorganz/luau-lsp@1.32.1"
 # rojo = "rojo-rbx/rojo@6.2.0"
