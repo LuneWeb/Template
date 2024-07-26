@@ -1,7 +1,7 @@
 {
   "luau-lsp.platform.type": "standard",
   "luau-lsp.require.mode": "relativeToFile",
-  "luau-lsp.types.definitionFiles": ["~/.luneweb/.type_defs-0.3.0-pre3.d.luau"],
+  "luau-lsp.types.definitionFiles": ["~/.luneweb/.type_defs-0.3.0.d.luau"],
   "luau-lsp.require.fileAliases": {},
   "luau-lsp.require.directoryAliases": {
     "@lune/": "~/.lune/.typedefs/0.8.6/"
