@@ -1,6 +1,5 @@
 local window = WindowBuilder.new({
 	title = "Lune+Tauri",
-	url = "http://localhost:5173",
 })
 
 print("Running luneweb", _VERSION)
