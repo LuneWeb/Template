@@ -1,10 +1,81 @@
-local window = WindowBuilder.new({})
+local process = require("@lune/process")
 local useDom = require("@luneweb/dom")
+local fs = require("@lune/fs")
 
-print("Running luneweb", _VERSION)
+local window = WindowBuilder.new({
+	dev = false,
+})
 
+local playlist: { string } = {}
+local directories = {}
+directories.home = if process.os == "windows" then process.env.HOMEPATH else nil
+directories.music = `{directories.home}/Music`
+
+assert(directories.home, "Home directory not found (might not be implemented for this os yet.)")
 assert(AudioBuilder, "Audio is not available")
 
+for _, name in fs.readDir(directories.music) do
+	local path = `{directories.music}/{name}`
+
+	if fs.isDir(path) then
+		continue
+	end
+
+	table.insert(playlist, path)
+end
+
+print(`Playlist contains {#playlist} songs`)
+
+local currentAudio: AudioSource?
+local currentIndex = 0
+
+local function stopAudio()
+	if currentAudio then
+		currentAudio:stop()
+	end
+end
+
+local function loadCurrentPlaylistAudio()
+	local audio = AudioBuilder.fromBuffer(buffer.fromstring(fs.readFile(playlist[currentIndex])))
+	audio:play()
+
+	stopAudio()
+	currentAudio = audio
+
+	return audio
+end
+
 useDom.connect(window, function(dom)
-	print("Dom Loaded")
+	stopAudio()
+	currentIndex = 0
+
+	local nextButton = dom:createElement("button")
+	nextButton:setProp("innerHTML", "Next")
+	nextButton:listen("click", function()
+		currentIndex += 1
+
+		if currentIndex >= #playlist then
+			currentIndex = 1
+		end
+
+		loadCurrentPlaylistAudio()
+	end)
+
+	local prevButton = dom:createElement("button")
+	prevButton:setProp("innerHTML", "Previous")
+	prevButton:listen("click", function()
+		currentIndex -= 1
+
+		if currentIndex <= 0 then
+			currentIndex = #playlist
+		end
+
+		loadCurrentPlaylistAudio()
+	end)
+
+	assert(dom.body, "body is not available")
+	dom.body:appendChild(prevButton)
+	dom.body:appendChild(nextButton)
 end)
+
+print("Running luneweb", _VERSION)
