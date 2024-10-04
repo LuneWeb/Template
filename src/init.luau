@@ -1,5 +1,6 @@
 local process = require("@lune/process")
 local useDom = require("@luneweb/dom")
+local task = require("@lune/task")
 local fs = require("@lune/fs")
 
 local window = WindowBuilder.new({
@@ -28,6 +29,7 @@ print(`Playlist contains {#playlist} songs`)
 
 local currentAudio: AudioSource?
 local currentIndex = 0
+local threads: { thread? } = {}
 
 local function stopAudio()
 	if currentAudio then
@@ -36,7 +38,10 @@ local function stopAudio()
 end
 
 local function loadCurrentPlaylistAudio()
-	local audio = AudioBuilder.fromBuffer(buffer.fromstring(fs.readFile(playlist[currentIndex])))
+	assert(AudioBuilder)
+
+	local content = fs.readFile(playlist[currentIndex])
+	local audio = AudioBuilder.fromBuffer(buffer.fromstring(content))
 	audio:play()
 
 	stopAudio()
@@ -46,6 +51,12 @@ local function loadCurrentPlaylistAudio()
 end
 
 useDom.connect(window, function(dom)
+	for i, v in threads do
+		assert(v)
+		task.cancel(v)
+		threads[i] = nil
+	end
+
 	stopAudio()
 	currentIndex = 0
 
@@ -73,9 +84,32 @@ useDom.connect(window, function(dom)
 		loadCurrentPlaylistAudio()
 	end)
 
+	local progressBar = dom:createElement("progress")
+	progressBar:setProp("max", 100)
+	progressBar:setProp("value", 0)
+
+	local function updateProgressBar()
+		if currentAudio then
+			local alpha = currentAudio.position / currentAudio.duration
+			progressBar:setProp("value", alpha * 100)
+		end
+	end
+
+	table.insert(
+		threads,
+		task.spawn(function()
+			while true do
+				task.wait(0.16)
+
+				updateProgressBar()
+			end
+		end)
+	)
+
 	assert(dom.body, "body is not available")
 	dom.body:appendChild(prevButton)
 	dom.body:appendChild(nextButton)
+	dom.body:appendChild(progressBar)
 end)
 
 print("Running luneweb", _VERSION)
