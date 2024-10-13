@@ -25,7 +25,7 @@ useDom.connect(window, function(dom)
 		threads[i] = nil
 	end
 
-	actions.LoadMusic()
+	task.spawn(actions.LoadMusic)
 
 	local nextButton = dom:createElement("button")
 	nextButton:setProp("innerHTML", "Next")
