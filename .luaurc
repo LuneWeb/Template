@@ -1,7 +1,7 @@
 {
   "languageMode": "strict",
   "aliases": {
-    "luneweb": ".luneweb/.libraries-0.6.0-beta5/",
+    "luneweb": ".luneweb/.libraries-0.6.0/",
     "pkg": "pkg/"
   }
 }
