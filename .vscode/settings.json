@@ -6,8 +6,8 @@
   ],
   "luau-lsp.require.fileAliases": {},
   "luau-lsp.require.directoryAliases": {
-    "@lune/": "~/.lune/.typedefs/0.8.8/",
-    "@luneweb/": ".luneweb/.libraries-0.6.0-beta5/",
+    "@lune/": "~/.lune/.typedefs/0.8.9/",
+    "@luneweb/": ".luneweb/.libraries-0.6.0/",
     "@pkg/": "pkg/"
   },
   "luau-lsp.fflags.override": {
